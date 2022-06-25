@@ -1,16 +1,13 @@
-let myLibrary = [];
+let myLibrary;
+myLibrary = (JSON.parse(localStorage.getItem("books")) == null) ? [] : JSON.parse(localStorage.getItem("books")); 
+
 var index = 0;
 const bookContainer = document.querySelector('#book-container');
 const addBookBtn = document.querySelector('#addBook');
 const addBookForm = document.querySelector('.add-new-book');
 const submitNewBook = document.querySelector('#add-book');
 
-var book1 = new Book('a',123,123);
-var book2 = new Book('b',13,123);
-var book3 = new Book('c',12,1);
-addBookToLibrary(book1);
-addBookToLibrary(book2);
-addBookToLibrary(book3);
+loadBooks();
 
 submitNewBook.addEventListener('click', ()=>{
     //get input values from form
@@ -21,7 +18,7 @@ submitNewBook.addEventListener('click', ()=>{
     let newBookForm = document.querySelector('#newBookForm');
     // create new book
     var newBook = new Book(newBookTitle,newBookAuthor,newBookPages);
-    newBook.read = (newBookRead.checked) ? true : false; 
+    newBook.read = (newBookRead.checked) ? "Read" : "Not Read"; 
     addBookToLibrary(newBook);
     newBookForm.reset();
     addBookForm.style.display = 'none';
@@ -34,17 +31,27 @@ addBookBtn.addEventListener('click', ()=>{
     addBookForm.style.display = 'flex';
 });
 
+function loadBooks(){
+    if(myLibrary != null){
+        myLibrary.forEach(book => {
+            updateLibrary(book);
+        });
+    }
+}
+
+
 
 
 function Book(title, author, pages){
     this.title = title;
     this.author= author;
     this.pages = pages;
-    this.read = false;
+    this.read = "Not Read";
 } 
 
 function addBookToLibrary(book){
     myLibrary.push(book);
+    localStorage.setItem("books",JSON.stringify(myLibrary));
     updateLibrary(book);
 }
 
@@ -87,10 +94,29 @@ function createCard(book){
     card.appendChild(title);
     card.appendChild(author);
     card.appendChild(pages);
+    if(read.textContent == "Read"){
+        read.setAttribute("class","read")
+    }else{
+        read.setAttribute("class","not-read")
+    }
+
+    read.addEventListener('click',()=>{
+        if(read.textContent == "Read"){
+            read.setAttribute("class","not-read");
+            read.textContent = "Not Read";
+            myLibrary[pos].read = "Not Read"
+        }else{
+            read.setAttribute("class","read");
+            read.textContent = "Read";
+            myLibrary[pos].read = "Read"
+        }
+        localStorage.setItem("books",JSON.stringify(myLibrary));
+    })
     card.appendChild(read);
 
     remove.addEventListener('click',()=>{
         myLibrary.splice(pos,1);
+        localStorage.setItem("books",JSON.stringify(myLibrary));
         refreshLibrary();
     })
     card.appendChild(remove);
