@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reading List</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    <div class="header"></div>
+    <h1>Reading List</h1>
+    <div id="book-container" class="book-container">
+        
+        <div id="addBook" class="book addBook">+</div>
+
+        <div class="book add-new-book">
+            <form id="newBookForm">
+                <div class="input-row">
+                    <label for="title">Title</label>
+                    <input id="title" type="text">
+                </div>
+                <div class="input-row">
+                    <label for="author">Author</label>
+                    <input id="author" type="text">
+                </div>
+                <div class="input-row">
+                    <label for="pages">No. of pages</label>
+                    <input id="pages" type="number">
+                </div>
+                <div class="input-row">
+                    <p>Read?</p>
+                
+                    <div>
+                        <input type="radio" name="read" id="radio-yes">
+                        <label for="read">Yes</label>
+                
+                        <input type="radio" name="read" checked>
+                        <label for="read">No</label>
+                    </div>
+                </div>
+            </form>
+
+            <button class="add-book" id="add-book">+</button>
+        </div>
+    </div>
+</body>
+</html>

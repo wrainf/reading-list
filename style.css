@@ -1,0 +1,79 @@
+@font-face {
+    font-family: SF-Pro;
+    src: url(SF-Pro.ttf);
+}
+
+*{
+    font-family: 'SF-Pro',sans-serif;
+    letter-spacing: 2px;
+}
+
+h1,h2,h3,p{
+    margin:0px;
+}
+
+body{
+   position: absolute;
+   top:0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+}
+
+.book{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 12px;
+    box-shadow: 0px 0px 10px 0px #ececec;
+    border-radius: 40px;
+}
+
+.book-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,400px));
+    gap: 32px;
+}
+
+.addBook{
+    background-color: #ececec;
+    font-size: 48px;
+}
+
+.add-new-book{
+    display: none;
+    flex-direction: column;
+}
+
+.input-row{
+    width: 310px;
+    display: flex;
+    gap: 32px;
+    justify-content: space-between;
+    
+}
+
+input{
+    border-radius: 5px;
+    border-color: 2px solid #ececec;
+}
+
+.add-book{
+    border: none;
+    margin-top: 16px;
+    font-size: 16px;
+    width: 50px;
+    padding: 5px;
+    border-radius: 50px;
+    background-color: #ececec;
+    box-shadow: 0px 0px 10px 0px #ececec;
+}
+
+button:active{
+    background-color: white;
+    color: black;
+}
+
