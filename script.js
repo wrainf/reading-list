@@ -1,8 +1,16 @@
 let myLibrary = [];
+var index = 0;
 const bookContainer = document.querySelector('#book-container');
 const addBookBtn = document.querySelector('#addBook');
 const addBookForm = document.querySelector('.add-new-book');
 const submitNewBook = document.querySelector('#add-book');
+
+var book1 = new Book('a',123,123);
+var book2 = new Book('b',13,123);
+var book3 = new Book('c',12,1);
+addBookToLibrary(book1);
+addBookToLibrary(book2);
+addBookToLibrary(book3);
 
 submitNewBook.addEventListener('click', ()=>{
     //get input values from form
@@ -27,6 +35,7 @@ addBookBtn.addEventListener('click', ()=>{
 });
 
 
+
 function Book(title, author, pages){
     this.title = title;
     this.author= author;
@@ -46,14 +55,22 @@ function updateLibrary(book){
    
 }
 
+function refreshLibrary(){
+    let cards = document.querySelectorAll('#book'); 
+    cards.forEach(book => {
+        book.parentElement.removeChild(book);
+    });
 
-function removeBook(index){
-    //removes book at index
-    myLibrary.splice(index, 1);
+    index = 0;
+    for (let index = 0; index < myLibrary.length; index++) {
+        const book = myLibrary[index];
+        updateLibrary(book);
+    }
+
 }
 
 function createCard(book){
-    let index = myLibrary.length;
+    let pos = index;
     const card = document.createElement("div");
     const title = document.createElement("h2");
     const author = document.createElement("h3");
@@ -71,12 +88,16 @@ function createCard(book){
     card.appendChild(author);
     card.appendChild(pages);
     card.appendChild(read);
-    remove.setAttribute("class","card-button");
-    remove.setAttribute("id",index);
+
+    remove.addEventListener('click',()=>{
+        myLibrary.splice(pos,1);
+        refreshLibrary();
+    })
     card.appendChild(remove);
     card.setAttribute("class","book");
+    card.setAttribute("id","book");
     
-    
+    index++;
     return card;
 }
 
